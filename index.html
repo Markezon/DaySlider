@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Слайдер задач</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2 class="form-container_header">Добавить задачу</h2>
+      <form id="task-form">
+        <input type="text" id="task-name" placeholder="Задача" required />
+        <input type="time" id="start-time" required />
+        <input type="time" id="end-time" required />
+        <label for="task-color">Выберите цвет задачи:</label>
+        <input type="color" id="task-color" value="#007bff" />
+        <button type="submit">Добавить задачу</button>
+      </form>
+    </div>
+
+    <button id="delete-all-tasks">Удалить все задачи</button>
+
+    <div class="slider-container">
+      <button class="slider-button left" id="scroll-left">&#8592;</button>
+      <div class="slider" id="slider"></div>
+      <button class="slider-button right" id="scroll-right">&#8594;</button>
+    </div>
+
+    <div class="task-list">
+      <h3 class="task-list_header">Список задач</h3>
+      <ul id="task-list"></ul>
+    </div>
+
+    <!-- Модальное окно для подтверждения удаления -->
+    <div id="delete-modal" class="modal">
+      <div class="modal-content">
+        <p>Вы уверены, что хотите удалить все задачи?</p>
+        <button id="confirm-delete">Подтвердить удаление</button>
+        <button id="cancel-delete">Отмена</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

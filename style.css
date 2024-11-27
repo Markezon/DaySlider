@@ -1,0 +1,304 @@
+body {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  background-color: #f4f7fb;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.6s;
+}
+
+button:hover {
+  opacity: 0.8;
+  transform: scale(105%);
+  box-shadow: 0 4px 4px rgba(0, 194, 240, 0.5);
+  background-color: #00c2f0;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-container_header {
+  text-align: center;
+}
+#task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+#task-form input,
+#task-form button {
+  height: 30px;
+  width: 250px;
+  padding: 0px 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+#task-form input:focus,
+#task-form button:focus {
+  outline: none;
+  border-color: #5e6e84;
+}
+
+#task-form button {
+  height: 40px;
+  background-color: #5e6e84;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#task-form button:hover {
+  background-color: #4d5a6d;
+}
+
+/* Кнопка "Удалить все задачи" */
+#delete-all-tasks {
+  margin-bottom: 20px;
+  background-color: #ff6f61;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#delete-all-tasks:hover {
+  background-color: #e65c50;
+}
+
+.slider-container {
+  width: 600px; /* Показывает 5 часов (5 * 120px = 600px) */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  display: flex;
+  width: 2880px; /* 24 часа по 120px каждое */
+  transition: transform 0.4s ease-out;
+  user-select: none;
+}
+
+.hour {
+  width: 120px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.task {
+  position: absolute;
+  height: 100%;
+  color: white;
+  padding: 2px 5px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 3px;
+}
+
+.slider-button {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.slider-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.task-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-list_header {
+  text-align: center;
+}
+
+.task-list button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.task-list button:hover {
+  background-color: darkred;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-item span {
+  width: 300px;
+  font-size: 16px;
+  color: #333;
+}
+
+.task-item input[type="checkbox"] {
+  margin-right: 10px;
+  height: 20px;
+  width: 20px;
+}
+
+.task-item button {
+  background-color: #ff6f61;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.task-item button:hover {
+  background-color: #e65c50;
+}
+
+.task-item input[type="checkbox"]:hover {
+  cursor: pointer;
+  scale: 110%;
+  transition: all 0.5s;
+}
+
+.task-item input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  color: #bbb;
+}
+
+.task-item input[type="checkbox"]:checked:hover {
+  cursor: auto;
+  scale: 100%;
+}
+
+/* Стили для модального окна */
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+  z-index: 1000; /* Модальное окно поверх других элементов */
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+#confirm-delete {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+#cancel-delete {
+  background-color: #ddd;
+  color: #333;
+}
+
+#confirm-delete:hover {
+  background-color: #e65c50;
+}
+
+#cancel-delete:hover {
+  background-color: #bbb;
+}
+
+/* Анимация модального окна */
+/* .modal.show {
+  display: block;
+  opacity: 1;
+  transition: opacity 10.3s ease-in;
+} */
