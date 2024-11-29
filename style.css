@@ -104,8 +104,7 @@ button:hover {
 
 .slider {
   display: flex;
-  margin-left: 120px;
-  width: 3000px; /* 24 часа по 120px каждое */
+  width: 2880px; /* 24 часа по 120px каждое */
   transition: transform 0.4s ease-out;
   user-select: none;
 }
@@ -142,8 +141,6 @@ button:hover {
   padding: 10px;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 1;
 }
 
