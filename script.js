@@ -91,7 +91,7 @@ function addTaskToList(taskName, startTime, endTime, taskColor, taskId) {
     if (taskCheckbox.checked) {
       // Если чекбокс отмечен, перечеркиваем задачу и блокируем взаимодействие
       taskText.style.textDecoration = "line-through"; // Перечеркиваем текст
-      taskCheckbox.disabled = true; // Блокируем чекбокс
+      /*       taskCheckbox.disabled = true; // Блокируем чекбокс */
     } else {
       // Если чекбокс снят, снимаем перечеркивание
       taskText.style.textDecoration = "none";
@@ -426,9 +426,6 @@ function updateTaskOnSlider(taskId, taskName, startTime, endTime, taskColor) {
   }
 }
 //////////////////
-
-// Обработчик клика по кнопке "Удалить все задачи"
-deleteAllButton.addEventListener("click", removeAllTasks);
 
 // Инициализация слайдера
 generateHours();
