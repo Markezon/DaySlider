@@ -274,7 +274,11 @@ button:hover {
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
   position: absolute;
+  align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -289,6 +293,12 @@ button:hover {
 .modal-content p {
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+.modal-content input {
+  margin-bottom: 10px;
+  height: 30px;
+  width: 100%;
 }
 
 #confirm-delete {
