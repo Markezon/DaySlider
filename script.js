@@ -77,7 +77,12 @@ function addTaskToList(taskName, startTime, endTime, taskColor, taskId) {
   taskDiv.setAttribute("data-id", taskId); // Уникальный ID для каждой задачи
 
   const taskText = document.createElement("span");
-  taskText.textContent = `${taskName} (${startTime} - ${endTime})`;
+  taskText.textContent = taskName;
+
+  // Новый span для отображения времени
+  const taskTime = document.createElement("span");
+  taskTime.textContent = `${startTime} - ${endTime}`;
+  taskTime.classList.add("task-time");
 
   // Чекбокс для удаления задачи
   const taskCheckbox = document.createElement("input");
@@ -87,8 +92,6 @@ function addTaskToList(taskName, startTime, endTime, taskColor, taskId) {
       // Если чекбокс отмечен, перечеркиваем задачу и блокируем взаимодействие
       taskText.style.textDecoration = "line-through"; // Перечеркиваем текст
       taskCheckbox.disabled = true; // Блокируем чекбокс
-      deleteButton.disabled = true; // Блокируем кнопку удаления
-      deleteButton.style.display = "none"; // Прячем кнопку удаления
     } else {
       // Если чекбокс снят, снимаем перечеркивание
       taskText.style.textDecoration = "none";
@@ -105,9 +108,19 @@ function addTaskToList(taskName, startTime, endTime, taskColor, taskId) {
     removeTask(taskId); // Удалить задачу по id
   });
 
+  // Кнопка для изменения задачи
+  const editButton = document.createElement("button");
+  editButton.textContent = "Изменить";
+  editButton.classList.add("task_edit_btn");
+  editButton.addEventListener("click", () => {
+    openEditModal(taskId, taskName, startTime, endTime, taskColor);
+  });
+
   taskDiv.appendChild(taskText);
+  taskDiv.appendChild(taskTime); // Добавляем новый span для времени
   taskDiv.appendChild(taskCheckbox);
   taskDiv.appendChild(deleteButton);
+  taskDiv.appendChild(editButton); // Добавляем кнопку изменения
 
   taskList.appendChild(taskDiv);
 }
@@ -325,6 +338,94 @@ window.addEventListener("keydown", (event) => {
 });
 
 /////////////
+// Открытие модального окна для редактирования задачи
+function openEditModal(taskId, taskName, startTime, endTime, taskColor) {
+  const modalHtml = `
+    <div class="modal-content">
+      <h2>Изменить задачу</h2>
+      <input type="text" id="edit-task-name" value="${taskName}" />
+      <input type="time" id="edit-start-time" value="${startTime}" />
+      <input type="time" id="edit-end-time" value="${endTime}" />
+      <input type="color" id="edit-task-color" value="${taskColor}" />
+      <button id="save-changes">Сохранить изменения</button>
+      <button id="cancel-edit">Отмена</button>
+    </div>
+  `;
+
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  modal.innerHTML = modalHtml;
+  document.body.appendChild(modal);
+  modal.style.display = "block";
+
+  const saveChangesButton = modal.querySelector("#save-changes");
+  const cancelEditButton = modal.querySelector("#cancel-edit");
+
+  // Сохранение изменений
+  saveChangesButton.addEventListener("click", () => {
+    const editedName = modal.querySelector("#edit-task-name").value;
+    const editedStartTime = modal.querySelector("#edit-start-time").value;
+    const editedEndTime = modal.querySelector("#edit-end-time").value;
+    const editedColor = modal.querySelector("#edit-task-color").value;
+
+    // Обновление задачи в списке
+    updateTaskInList(
+      taskId,
+      editedName,
+      editedStartTime,
+      editedEndTime,
+      editedColor
+    );
+
+    // Обновление задачи на слайдере
+    updateTaskOnSlider(
+      taskId,
+      editedName,
+      editedStartTime,
+      editedEndTime,
+      editedColor
+    );
+
+    // Закрытие модального окна
+    modal.style.display = "none";
+    modal.remove();
+  });
+
+  // Отмена редактирования
+  cancelEditButton.addEventListener("click", () => {
+    modal.style.display = "none";
+    modal.remove();
+  });
+}
+
+// Обновление задачи в списке
+function updateTaskInList(taskId, taskName, startTime, endTime, taskColor) {
+  const taskItem = document.querySelector(`.task-item[data-id="${taskId}"]`);
+  if (taskItem) {
+    taskItem.querySelector("span").textContent = taskName;
+    taskItem.querySelector(
+      ".task-time"
+    ).textContent = `${startTime} - ${endTime}`;
+  }
+}
+
+// Обновление задачи на слайдере
+function updateTaskOnSlider(taskId, taskName, startTime, endTime, taskColor) {
+  const taskElement = document.querySelector(`.task[data-id="${taskId}"]`);
+  if (taskElement) {
+    const startMinutes = timeToMinutes(startTime);
+    const endMinutes = timeToMinutes(endTime);
+    const rgbaColor = hexToRgba(taskColor, 0.3); // Прозрачность 0.3
+
+    taskElement.style.left = `${(startMinutes / 60) * slideWidth}px`;
+    taskElement.style.width = `${
+      ((endMinutes - startMinutes) / 60) * slideWidth
+    }px`;
+    taskElement.textContent = taskName;
+    taskElement.style.backgroundColor = rgbaColor;
+  }
+}
+//////////////////
 
 // Обработчик клика по кнопке "Удалить все задачи"
 deleteAllButton.addEventListener("click", removeAllTasks);
