@@ -2,6 +2,8 @@
 
 ## The project can be viewed by following the [link](https://dayslider.khudorenko.com/)
 
+### A daily task planner with visual placement of tasks on a timeline
+
 #### **Technologies Used:**
 
 -  **HTML**
